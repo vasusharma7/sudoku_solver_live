@@ -7,13 +7,7 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.datasets import mnist
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.metrics import classification_report
-import argparse
 
-# construct the argument parser and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-m", "--model", required=True,
-                help="path to output model after training")
-args = vars(ap.parse_args())
 
 # initialize the initial learning rate, number of epochs to train
 # for, and batch size
@@ -64,4 +58,4 @@ print(classification_report(
 
 # serialize the model to disk
 print("[INFO] serializing digit model...")
-model.save(args["model"], save_format="h5")
+model.save("digit_classifier.h5", save_format="h5")

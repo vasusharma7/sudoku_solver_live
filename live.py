@@ -15,6 +15,7 @@ while(True):
     # try:
     # Capture frame-by-frame
     ret, frame = cap.read()
+    frame = cv2.imread("./puzzle.png")
     cv2.imshow('frame', frame)
 
     try:
@@ -40,6 +41,7 @@ while(True):
     cv2.imshow('frame', frame)
     if cv2.waitKey(1) & 0xFF == 27:
         break
+    break
     # except:
     #     print(sys.exc_info()[0])
     #     break

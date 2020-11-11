@@ -1,4 +1,4 @@
-
+import constraint
 import cv2
 
 
@@ -15,7 +15,7 @@ class Sudoku:
 
     def solve_backtrack(self):
         self.depth += 1
-        if self.depth > 5000:
+        if self.depth > 15000:
             return
 
         find = self.find_empty()
@@ -36,6 +36,60 @@ class Sudoku:
                 self.board[row][col] = 0
 
         return False
+
+    def solve_constraint(self):
+
+        problem = constraint.Problem()
+
+        # letting VARIABLES 11 through 99 have an interval of [1..9]
+        for i in range(1, 10):
+            problem.addVariables(range(i * 10 + 1, i * 10 + 10), range(1, 10))
+
+        # adding the constraint that all values in a row must be different
+        # 11 through 19 must be different, 21 through 29 must be all different,...
+        for i in range(1, 10):
+            problem.addConstraint(constraint.AllDifferentConstraint(),
+                                  range(i * 10 + 1, i * 10 + 10))
+
+        # Also all values in a column must be different
+        # 11,21,31...91 must be different, also 12,22,32...92 must be different,...
+        for i in range(1, 10):
+            problem.addConstraint(
+                constraint.AllDifferentConstraint(), range(10 + i, 100 + i, 10))
+
+        # The last rule in a sudoku 9x9 puzzle is that those nine 3x3 squares must have all different values,
+        # we start off by noting that each square "starts" at row indices 1, 4, 7
+        for i in [1, 4, 7]:
+            # Then we note that it's the same for columns, the squares start at indices 1, 4, 7 as well
+            # basically one square starts at 11, the other at 14, another at 41, etc
+            for j in [1, 4, 7]:
+                square = [10*i+j, 10*i+j+1, 10*i+j+2, 10 *
+                          (i+1)+j, 10*(i+1)+j+1, 10*(i+1)+j+2, 10*(i+2)+j, 10*(i+2)+j+1, 10*(i+2)+j+2]
+                # As an example, for i = 1 and j = 1 (bottom left square), the cells 11,12,13,
+                # 21,22,23, 31,32,33 have to be all different
+                problem.addConstraint(
+                    constraint.AllDifferentConstraint(), square)
+
+        # adding a constraint for each number on the board (0 is an "empty" cell),
+        # Since they're already solved, we don't need to solve them
+        for i in range(9):
+            for j in range(9):
+                if self.board[i][j] != 0:
+                    def const(variable_value, value_in_table=self.board[i][j]):
+                        if variable_value == value_in_table:
+                            return True
+
+                    # Basically making sure that our program doesn't change the values already on the board
+                    # By telling it that the values NEED to equal the corresponding ones at the base board
+                    problem.addConstraint(const, [((i+1)*10 + (j+1))])
+
+        solutions = problem.getSolutions()
+
+        if len(solutions) == 0:
+            return
+        else:
+            for i, j in solutions[0].items():
+                self.board[i//10-1][i % 10-1] = j
 
     def valid(self, num, pos):
 
@@ -119,22 +173,4 @@ class Sudoku:
                 cv2.putText(puzzleImage, str(digit), (17+i*factor, 30+j*factor),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
-        # for (cellRow, boardRow) in zip(self.locations, self.board):
-        #     # loop over individual cell in the row
-        #     for (box, digit) in zip(cellRow, boardRow):
-        #         # unpack the cell coordinates
-        #         startX, startY, endX, endY = box
-
-        #         # compute the coordinates of where the digit will be drawn
-        #         # on the output puzzle image
-        #         textX = int((endX - startX) * 0.33)
-        #         textY = int((endY - startY) * -0.2)
-        #         textX += startX
-        #         textY += endY
-
-        #         # draw the result digit on the sudoku puzzle image
-        #         cv2.putText(puzzleImage, str(digit), (textX, textY),
-        #                     cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 255), 2)
-
-        # show the output image
         cv2.imshow("Sudoku Result", puzzleImage)
