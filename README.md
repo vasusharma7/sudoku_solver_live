@@ -3,7 +3,7 @@
 <center>This project is amalgamation of foundational Artificial Intelligence concepts - (Backtracking and CSP) and modern Machine Learning paradigms like Computer Vision (DL), along with some image processing and transformations</center>
 <br/>
 
-![Presentation](https://docs.google.com/presentation/d/1r9y4RNO1L54E_rSDBj7mjvv0h3xivp3G13jCqdWflWc)
+![Presentation](https://docs.google.com/presentation/d/1r9y4RNO1L54E_rSDBj7mjvv0h3xivp3G13jCqdWflWc/edit?usp=sharing)
 
 **Requirements**
  
