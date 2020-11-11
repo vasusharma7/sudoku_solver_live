@@ -3,6 +3,27 @@
 <center>This project is amalgamation of foundational Artificial Intelligence concepts - (Backtracking and CSP) and modern Machine Learning paradigms like Computer Vision (DL), along with some image processing and transformations</center>
 <br/>
 
+**Requirements**
+ 
+ 1. Python
+   - python3
+   - pip3
+  
+ 2. Packages
+   - open-cv (cv2)
+   - python-constraint
+   - tensorflow
+   - keras
+   - numpy
+   - scikit learn
+   - imutils
+
+**To run the project**
+
+ - Run `python3 live.py` for starting webcam and start predicting.
+ - Run `python3 live.py --image <path to image>` for recognizing and solving sudoku from image
+ - Run `python3 live.py --image <path to image> --model <backtracking/csp>` for solving sudoku with a particular algorithm
+
 Steps Involved - 
 
 
