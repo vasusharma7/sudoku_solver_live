@@ -4,10 +4,14 @@
 <br/>
 
 **Requirements**
- a. 
+
+ -
+ 
   - Python3
   - Pip3
- b.
+  
+ -
+ 
   - open-cv (cv2)
   - python-constraint
   - tensorflow
