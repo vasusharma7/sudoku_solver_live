@@ -4,21 +4,19 @@
 <br/>
 
 **Requirements**
-
- -
  
-  - Python3
-  - Pip3
+ 1. Python
+   - python3
+   - pip3
   
- -
- 
-  - open-cv (cv2)
-  - python-constraint
-  - tensorflow
-  - keras
-  - numpy
-  - scikit learn
-  - imutils
+ 2. Packages
+   - open-cv (cv2)
+   - python-constraint
+   - tensorflow
+   - keras
+   - numpy
+   - scikit learn
+   - imutils
 
 **To run the project**
 
