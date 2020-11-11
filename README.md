@@ -26,8 +26,9 @@ Steps Involved -
   
 3. Solving Sudoku
 
-    a. Used 2 Algorithms for this - 
-    - Backtracking Search 
+    Used 2 Algorithms for this - 
+    
+    a. Backtracking Search 
     - Based on Recursive DFS with sudoku constraints.
     - Takes long time on complex sudoku problems.
 
