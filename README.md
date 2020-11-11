@@ -1,5 +1,7 @@
 <center><h1>Solving Sudoku on Live Cam</h1></center>
 
+<center>This project is amalgamation of foundational Artificial Intelligence concepts - (Backtracking and CSP) and modern Machine Learning paradigms like Computer Vision (DL), along with some image processing and transformations</center>
+
 
  1. Detecting Sudoku
  
