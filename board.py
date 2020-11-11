@@ -12,18 +12,7 @@ import imutils
 import cv2
 
 # construct the argument parser and parse the arguments
-if __name__ == "__main__":
 
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-m", "--model", required=True,
-                    help="path to trained digit classifier")
-    ap.add_argument("-i", "--image", required=True,
-                    help="path to input sudoku puzzle image")
-    ap.add_argument("-d", "--debug", type=int, default=-1,
-                    help="whether or not we are visualizing each step of the pipeline")
-    args = vars(ap.parse_args())
-args = {}
-args['debug'] = 0
 
 path = "./models/digit_classifier.h5"
 model = load_model(path)
@@ -36,7 +25,7 @@ def build_board(image):
     image = imutils.resize(image, width=600)
 
     # find the puzzle in the image
-    (puzzleImage, warped) = find_puzzle(image, debug=args["debug"] > 0)
+    (puzzleImage, warped) = find_puzzle(image)
     # initialize our 9x9 sudoku board
     board = np.zeros((9, 9), dtype="int")
 
@@ -71,7 +60,7 @@ def build_board(image):
             # extract the digit from the cell
             try:
                 cell = warped[startY:endY, startX:endX]
-                digit = extract_digit(cell, debug=args["debug"] > 0)
+                digit = extract_digit(cell)
             except:
                 return []
 

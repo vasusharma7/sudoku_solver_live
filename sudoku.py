@@ -3,9 +3,8 @@ import cv2
 
 
 class Sudoku:
-    def __init__(self, height, width, board, locations):
+    def __init__(self, height, width, board):
         assert height == width
-        self.locations = locations
         self.size = height
         self.height = height
         self.width = width
@@ -90,6 +89,7 @@ class Sudoku:
         else:
             for i, j in solutions[0].items():
                 self.board[i//10-1][i % 10-1] = j
+            self.show_result()
 
     def valid(self, num, pos):
 
@@ -169,7 +169,7 @@ class Sudoku:
         factor = 565//9
         for i in range(9):
             for j in range(9):
-                digit = self.board[i][j]
+                digit = self.board[j][i]
                 cv2.putText(puzzleImage, str(digit), (17+i*factor, 30+j*factor),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
